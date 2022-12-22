@@ -1,13 +1,17 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const { dependencies } = require("./package.json");
  
 module.exports = {
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: "http://localhost:4001/",
   },
  devServer: {
-   port: 3000,
+   static: {
+     directory: path.join(__dirname, "public"),
+   },
+   port: 4001,
  },
  devtool: "source-map",
  module: {
@@ -28,6 +32,18 @@ module.exports = {
        test: /\.css$/i,
        use: ["style-loader", "css-loader"],
      },
+     {
+       test: /\.(gif|png|jpe?g|svg)$/,
+       use: [
+         {
+           loader: "file-loader",
+           options: {
+             name: "[name].[ext]",
+             outputPath: "assets/images/",
+           },
+         },
+       ],
+     },
    ],
  },
  plugins: [
@@ -37,10 +53,10 @@ module.exports = {
      manifest: "./public/manifest.json",
    }),
    new ModuleFederationPlugin({
-    name: "Host",
-    remotes: {
-      Child: `Child@http://localhost:4000/moduleEntry.js`,
-      Child2: `Child2@http://localhost:4001/moduleEntry.js`,
+    name: "Child2",
+    filename: "moduleEntry.js",
+    exposes: {
+      "./App": "./src/App.jsx",
     },
     shared: {
       ...dependencies,
@@ -53,7 +69,7 @@ module.exports = {
         requiredVersion: dependencies["react-dom"],
       },
     },
-  })
+  }),
  ],
  resolve: {
    extensions: [".js", ".jsx"],

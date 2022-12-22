@@ -9,6 +9,7 @@ const DefaultLayout = () => {
        MAIN APP HEADER
       </div>
       <div className={'content'}>
+      <h3>This is Main app is only container for child apps</h3>
         <Outlet />
       </div>
       <div className={'header'}>Microfront MVP ©2022 </div>
