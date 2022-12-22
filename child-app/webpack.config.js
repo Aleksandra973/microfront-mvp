@@ -5,9 +5,12 @@ const { dependencies } = require("./package.json");
  
 module.exports = {
   output: {
-    publicPath: "http://localhost:4000/",
+    publicPath: 'auto',
   },
  devServer: {
+  hot: true,
+  open: ['/users'],
+  historyApiFallback: true,
    static: {
      directory: path.join(__dirname, "public"),
    },

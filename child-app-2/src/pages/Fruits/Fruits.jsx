@@ -14,7 +14,7 @@ const Fruits = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      <h2>Fruits List</h2>
+      <h2>Fruits List CHILD APP2</h2>
       <ul>
         {list.map((i) => (
           <li key={i.id}>

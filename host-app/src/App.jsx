@@ -22,8 +22,8 @@ export const App = () => {
   }
 
   const sendUser = () => {    
-    const resetCount = new CustomEvent('USER', {id: 1, name: 'TEST TESTOVICH'});
-    window.dispatchEvent(resetCount);
+    const userInfo = new CustomEvent('USER', {detail: {id: 1, name: 'TEST TESTOVICH'}});
+    window.dispatchEvent(userInfo);
   }
 
   return (

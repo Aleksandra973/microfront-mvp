@@ -4,7 +4,7 @@ import User from "./pages/Users/User";
 import { Route, Routes } from 'react-router-dom';
 import { Observable } from 'windowed-observable';
 import { store } from './store'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 
 
 const observable = new Observable('cart-items');
